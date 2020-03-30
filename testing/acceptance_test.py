@@ -1377,3 +1377,22 @@ def get_workers_and_test_count_by_prefix(prefix, lines, expected_status="PASSED"
         if expected_status == status and nodeid.startswith(prefix):
             result[worker] = result.get(worker, 0) + 1
     return result
+
+
+def test_collection_crash(testdir):
+    p1 = testdir.makepyfile(
+        """
+        assert 0
+    """
+    )
+    result = testdir.runpytest(p1, "-n1")
+    assert result.ret == 1
+    result.stdout.fnmatch_lines(
+        [
+            "gw0 I",
+            "gw0 [[]0[]]",
+            "*_ ERROR collecting test_collection_crash.py _*",
+            "E   assert 0",
+            "*= 1 error in *",
+        ]
+    )
