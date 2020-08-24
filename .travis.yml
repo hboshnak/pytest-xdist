@@ -34,6 +34,8 @@ jobs:
       env: TOXENV=py39-pytestlatest
     - python: "3.8"
       env: TOXENV=py38-pytestmaster
+    - python: "3.8"
+      env: TOXENV=py38-pytestblueyed
 
     - stage: deploy
       python: '3.8'
