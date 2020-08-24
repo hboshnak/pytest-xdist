@@ -1,16 +1,6 @@
 dist: xenial
 language: python
 
-notifications:
-  irc:
-    channels:
-      - 'chat.freenode.net#pytest'
-    on_success: change
-    on_failure: change
-    skip_join: true
-  email:
-  - pytest-commit@python.org
-
 install:
   - pip install -U pip setuptools
   - pip install tox setuptools_scm
